@@ -19,7 +19,7 @@ void Game::initialise()
 	
 	timeSinceLastUpdate = sf::Time::Zero;
 	ground.setPosition(10, 400);
-	ground.setSize(sf::Vector2f(580, 1));
+	ground.setSize(sf::Vector2f(780, 1));
 	ground.setFillColor(sf::Color::Yellow);
 	if (!font.loadFromFile("arial.ttf"))
 	{
@@ -33,7 +33,11 @@ void Game::initialise()
 }
 void Game::processEvents()
 {
-	//read keyboard inout
+	//read keyboard input
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	{
+		//object.reinitialise();
+	}
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
