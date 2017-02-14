@@ -13,9 +13,8 @@
 #endif 
 #pragma comment(lib,"opengl32.lib") 
 #pragma comment(lib,"glu32.lib") 
-
 #include <SFML/Graphics.hpp>
-
+#include "PhysicsObject.h"
 #include <iostream>
 class Game
 {
@@ -23,29 +22,26 @@ public:
 	Game();
 	~Game();
 
+	PhysicsObject object;
 
 	void run();
 	void initialise();
-	void update(float dt);
+	void update(sf::Time t);
 	void draw();
 	void processEvents();
 
 	sf::RenderWindow window;
-	sf::CircleShape shape;
-	sf::Vector2f velocity;
-	sf::Vector2f position;
-	sf::Vector2f gravity;
-	sf::Vector2f force;
-	const int U = 50;
+	
 	sf::Clock clock;
 	const float FPS = 60.0f;
 	const sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
 	sf::Time timeSinceLastUpdate;
 	sf::Font font;
-	sf::Text predictedTimeText, predictedHeightText, realTimeText, realHeightText;
+	
 	sf::RectangleShape ground;
-	float preditedTime, predictedHeight, realTime, realHeight;
-	bool jump;
+	
+	
+
 	sf::ContextSettings settings;
 };
 

@@ -15,15 +15,8 @@ Game::~Game()
 
 void Game::initialise()
 {
-	settings.antialiasingLevel = 8;
-	shape.setRadius(7.0f);
-	shape.setFillColor(sf::Color::Blue);
-	shape.setOrigin(sf::Vector2f(shape.getPosition().x + shape.getRadius(), shape.getPosition().y + shape.getRadius()));
-	velocity = sf::Vector2f(0, 0);
-	position = sf::Vector2f(400, 400 - shape.getRadius());
-	gravity = sf::Vector2f(0.0f, 9.8f);
-	force = sf::Vector2f(0.0f, U * -1);
-	jump = false;
+	
+	
 	timeSinceLastUpdate = sf::Time::Zero;
 	ground.setPosition(10, 400);
 	ground.setSize(sf::Vector2f(580, 1));
@@ -32,21 +25,8 @@ void Game::initialise()
 	{
 		std::cout << "COULDN'T LOAD FONT FILE" << std::endl;
 	}
-	
-	///*predictedHeightText.setFont(font);
-	//predictedTimeText.setFont(font);
-	//realHeightText.setFont(font);
-	//realTimeText.setFont(font);*/
-	//
-	//predictedHeightText.setCharacterSize(12);
-	//predictedTimeText.setCharacterSize(12);
-	//realHeightText.setCharacterSize(12);
-	//realTimeText.setCharacterSize(12);
 
-	//predictedHeightText;
-	//predictedTimeText;
-	//realHeightText;
-	//realTimeText;
+	object.initialise(&font, ground.getPosition().y);
 
 	clock.restart();
 
@@ -73,7 +53,7 @@ void Game::run()
 		//update every 60th of a second
 		if (timeSinceLastUpdate > timePerFrame)
 		{
-			update(timeSinceLastUpdate.asSeconds());
+			update(timeSinceLastUpdate);
 			draw();
 
 			timeSinceLastUpdate = sf::Time::Zero;
@@ -81,36 +61,18 @@ void Game::run()
 	}
 }
 
-void Game::update(float dt)
+void Game::update(sf::Time t)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jump == false)
-	{
-		velocity += force;
-		jump = true;
-	}
-	//Velocity = Velocity + acceleration* timeChange
-	velocity = velocity + gravity * dt;
-	
-	// update position and velocity here using equations in lab sheet using timeChange as  timeSinceLastUpdate.asSeconds().
-	// Position = Position + Velocity*timeChange + 0.5*acceleration*(timeChange)2
-	position = position + velocity * dt + 0.5f * gravity * (dt * dt);
-
-	if (position.y > 400 - shape.getRadius())
-	{
-		position.y = 400 - shape.getRadius();
-		jump = false;
-	}
-	//update shape on screen
-	shape.setPosition(position);
-
-	
+	object.update(t);
 }
 
 void Game::draw()
 {
 	window.clear();
-	window.draw(shape);
+
 	window.draw(ground);
-	window.draw(line, 2, sf::Lines);
+	//window.draw(line, 2, sf::Lines);
+	object.draw(&window);
+
 	window.display();
 }
