@@ -18,9 +18,13 @@ void Game::initialise()
 	
 	
 	timeSinceLastUpdate = sf::Time::Zero;
-	ground.setPosition(10, 400);
+	ground.setPosition(10, 700);
 	ground.setSize(sf::Vector2f(780, 1));
-	ground.setFillColor(sf::Color::Yellow);
+	ground.setFillColor(sf::Color::Yellow); 
+	wall.setPosition(100, 150);
+	wall.setSize(sf::Vector2f(1, 550));
+	wall.setFillColor(sf::Color::Red);
+
 	if (!font.loadFromFile("arial.ttf"))
 	{
 		std::cout << "COULDN'T LOAD FONT FILE" << std::endl;
@@ -75,6 +79,7 @@ void Game::draw()
 	window.clear();
 
 	window.draw(ground);
+	window.draw(wall);
 	//window.draw(line, 2, sf::Lines);
 	object.draw(&window);
 

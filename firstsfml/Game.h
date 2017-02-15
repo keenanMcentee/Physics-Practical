@@ -39,7 +39,7 @@ public:
 	sf::Font font;
 	
 	sf::RectangleShape ground;
-	
+	sf::RectangleShape wall;
 	
 
 	sf::ContextSettings settings;

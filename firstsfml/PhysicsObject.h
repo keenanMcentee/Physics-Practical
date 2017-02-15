@@ -13,10 +13,10 @@ private:
 	void keyboardHandler();
 	void textHandler();
 	void textInitialise(sf::Font *font);
-
-	sf::RectangleShape shape;
-	const float RADIUS = 2.0f;
-
+	const int PIXELS_TO_METERS = 20;
+	sf::CircleShape shape;
+	const float RADIUS = 1 * PIXELS_TO_METERS;
+	
 	sf::Vector2f impulsiveForceL;
 	sf::Vector2f impulsiveForceR;
 	sf::Vector2f velocity;
@@ -27,14 +27,19 @@ private:
 	const float U = 44.275f;
 	const float COEFFICIENT_OF_RESTITUTION = 0.5f;
 	const float COEFFICIENT_OF_FRICTION = 0.8f;
-	const sf::Vector2f GRAVITY = sf::Vector2f(0.0f, 9.8f);
+	const sf::Vector2f GRAVITY = sf::Vector2f(0.0f, 9.8f * PIXELS_TO_METERS);
 
-	sf::Text predictedTimeText, predictedHeightText, realTimeText, realHeightText, distanceMovedText, timeToStopText;
-
+	sf::Text predictedTimeText, predictedHeightText, realTimeText, realHeightText, distanceMovedText, timeToStopText, angleText, speedText;
+	
 	double preditedTime, predictedHeight, jumpingHeight, timeJumping, distanceMoved, timeToStop;
 	bool jump;
+	bool launched;
 	float m_groundLevel;
+	float previousPosX;
 
+	float m_angle;
+	float m_speed;
+	float angleInRads;
 
 };
 
